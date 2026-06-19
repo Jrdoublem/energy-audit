@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function SignUp({ onGoToLogin }) {
+function SignUp() {
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+
+  const handleSignUp = () => {
+    setShowToast(true);
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center font-sans relative overflow-hidden">
       
@@ -8,24 +19,11 @@ function SignUp({ onGoToLogin }) {
         <div className="absolute w-full h-[150%] top-[-25%] bg-tech-grid animate-grid-pan opacity-80"></div>
       </div>
 
-      <div className="w-full max-w-md relative pt-20 pb-8 sm:pt-24 sm:pb-12 z-10">
-        <div className="absolute top-6 left-6 sm:top-8 z-20">
-          <button 
-            type="button"
-            onClick={onGoToLogin}
-            className="flex items-center text-white text-sm sm:text-base font-medium hover:text-gray-300 transition-colors drop-shadow"
-          >
-            <svg className="w-5 h-5 mr-1.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-            </svg>
-            Back
-          </button>
-        </div>
-      </div>
+      <div className="w-full max-w-md relative pt-20 pb-8 sm:pt-24 sm:pb-12 z-10"></div>
 
-      <div className="bg-[#FBF9F4] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-8 sm:py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl sm:mb-12 z-10 flex-1 flex flex-col relative">
+      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-8 sm:py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl sm:mb-12 z-10 flex-1 flex flex-col relative">
         
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-[#091242] mb-6 sm:mb-8 tracking-wide">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-[#0F2854] mb-6 sm:mb-8 tracking-wide">
           Sign up
         </h2>
 
@@ -42,7 +40,7 @@ function SignUp({ onGoToLogin }) {
               <input
                 type="text"
                 placeholder="First name Last name"
-                className="w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
             </div>
           </div>
@@ -58,7 +56,7 @@ function SignUp({ onGoToLogin }) {
               <input
                 type="email"
                 placeholder="example@email.com"
-                className="w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-4 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
             </div>
           </div>
@@ -74,7 +72,7 @@ function SignUp({ onGoToLogin }) {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-black cursor-pointer">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -95,7 +93,7 @@ function SignUp({ onGoToLogin }) {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-black cursor-pointer">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -108,7 +106,8 @@ function SignUp({ onGoToLogin }) {
           <div className="pt-2 sm:pt-4">
             <button
               type="button"
-              className="w-full bg-[#091242] text-white font-bold text-xl py-4 rounded-2xl hover:bg-blue-900 transition-all duration-300 hover:shadow-[0_8px_25px_rgba(9,18,66,0.5)] hover:-translate-y-1 tracking-wide"
+              onClick={handleSignUp}
+              className="w-full bg-[#0F2854] text-white font-bold text-xl py-4 rounded-2xl hover:bg-[#1C4D8D] transition-all duration-300 hover:shadow-[0_8px_25px_rgba(9,18,66,0.5)] hover:-translate-y-1 tracking-wide"
             >
               Sign up
             </button>
@@ -116,10 +115,26 @@ function SignUp({ onGoToLogin }) {
         </form>
 
         <div className="text-center mt-auto pt-6 sm:pt-8 text-sm font-medium text-gray-600 pb-2">
-          มีบัญชีอยู่แล้ว? <button type="button" onClick={onGoToLogin} className="text-[#091242] font-bold hover:underline">เข้าสู่ระบบ</button>
+          มีบัญชีอยู่แล้ว? <button type="button" onClick={() => navigate('/login')} className="text-[#0F2854] font-bold hover:underline">เข้าสู่ระบบ</button>
         </div>
 
       </div>
+
+      {showToast && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-6">
+          <div className="bg-[#F7F8F0] rounded-3xl shadow-2xl w-full max-w-xs px-6 sm:px-10 py-8 sm:py-10 flex flex-col items-center gap-4 text-center">
+            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+              <svg className="w-9 h-9 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-base sm:text-lg font-bold text-[#0F2854] leading-snug">สมัครใช้งานสำเร็จ</p>
+              <p className="text-sm text-gray-500 leading-relaxed">รอการตรวจสอบจากแอดมิน</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

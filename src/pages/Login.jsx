@@ -1,7 +1,10 @@
 import React from 'react';
-import companyLogo from '../assets/Logo.png'; 
+import { useNavigate } from 'react-router-dom';
+import companyLogo from '../assets/Logo.png';
 
-function Login({ onGoToSignUp }) {
+function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center font-sans relative overflow-hidden">
       
@@ -24,16 +27,16 @@ function Login({ onGoToSignUp }) {
           ENGINSPECT
         </h1>
         
-        <p className="text-sm sm:text-base text-blue-200 font-medium tracking-wider mt-1.5 drop-shadow">
+        <p className="text-sm sm:text-base text-[#BDE8F5] font-medium tracking-wider mt-1.5 drop-shadow">
           Factory Energy Advisor
         </p>
         
       </div>
 
       {/* ส่วนกล่องฟอร์ม Login */}
-      <div className="bg-[#FBF9F4] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl sm:mb-12 z-10 flex-1 flex flex-col relative">
+      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl sm:mb-12 z-10 flex-1 flex flex-col relative">
         
-        <h2 className="text-4xl font-extrabold text-center text-[#091242] mb-8 tracking-wide">
+        <h2 className="text-4xl font-extrabold text-center text-[#0F2854] mb-8 tracking-wide">
           Login
         </h2>
 
@@ -50,7 +53,7 @@ function Login({ onGoToSignUp }) {
               <input
                 type="email"
                 placeholder="example@email.com"
-                className="w-full pl-12 pr-4 py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-4 py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
             </div>
           </div>
@@ -66,7 +69,7 @@ function Login({ onGoToSignUp }) {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-full pl-12 pr-12 py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#091242] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
+                className="w-full pl-12 pr-12 py-4 bg-white border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0F2854] text-base sm:text-lg text-gray-700 font-medium placeholder-gray-400"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-black cursor-pointer hover:text-gray-600 transition-colors">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -76,14 +79,15 @@ function Login({ onGoToSignUp }) {
             </div>
             
             <div className="text-right mt-3 mr-1">
-              <a href="#" className="text-[13px] font-bold text-[#091242] hover:underline">ลืมรหัสผ่าน?</a>
+              <button type="button" onClick={() => navigate('/forgot-password')} className="text-[13px] font-bold text-[#0F2854] hover:underline">ลืมรหัสผ่าน?</button>
             </div>
           </div>
 
           <div className="pt-4">
             <button
               type="button"
-              className="w-full bg-[#091242] text-white font-bold text-xl py-4 rounded-2xl hover:bg-blue-900 transition-all duration-300 hover:shadow-[0_8px_25px_rgba(9,18,66,0.5)] hover:-translate-y-1 tracking-wide"
+              onClick={() => navigate('/home')}
+              className="w-full bg-[#0F2854] text-white font-bold text-xl py-4 rounded-2xl hover:bg-[#1C4D8D] transition-all duration-300 hover:shadow-[0_8px_25px_rgba(9,18,66,0.5)] hover:-translate-y-1 tracking-wide"
             >
               Login
             </button>
@@ -91,7 +95,7 @@ function Login({ onGoToSignUp }) {
         </form>
 
         <div className="text-center mt-auto pt-8 text-sm font-medium text-gray-600 pb-2">
-          ยังไม่มีบัญชีใช่ไหม? <button onClick={onGoToSignUp} className="text-[#091242] font-bold hover:underline">สมัครสมาชิก</button>
+          ยังไม่มีบัญชีใช่ไหม? <button onClick={() => navigate('/signup')} className="text-[#0F2854] font-bold hover:underline">สมัครสมาชิก</button>
         </div>
 
       </div>

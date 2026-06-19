@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html,
+body {
+  background-color: #0F2854;
+}
+
 /* --- พื้นหลังไล่สีสไตล์ Premium Enterprise --- */
 .bg-animated-gradient {
-  background: linear-gradient(-45deg, #0B154D, #16308A, #040926, #0A1244);
+  background: linear-gradient(-45deg, #0F2854, #1C4D8D, #0F2854, #4988C4);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }
@@ -29,4 +38,24 @@
 
 .animate-grid-pan {
   animation: gridPan 4s linear infinite;
+}
+
+@media (min-width: 1024px) {
+  .animate-grid-pan {
+    animation: none;
+  }
+}
+
+/* --- พื้นหลังแชลล์แอป: มือถือใช้ไล่สีแบบเคลื่อนไหว, คอมใช้ไล่สีนิ่งจากบนลงล่าง --- */
+.bg-shell-gradient {
+  background: linear-gradient(-45deg, #0F2854, #1C4D8D, #0F2854, #4988C4);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@media (min-width: 1024px) {
+  .bg-shell-gradient {
+    background: linear-gradient(160deg, #0F2854 0%, #1C4D8D 55%, #4988C4 100%);
+    animation: none;
+  }
 }
