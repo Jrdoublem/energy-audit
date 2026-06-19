@@ -249,7 +249,7 @@ const CATEGORY_STYLE = {
 const RECENT_MEASUREMENTS = [
   { date: '19 มิ.ย. 2569', name: 'CH-01', category: 'Chiller', summary: 'COP: 2.243' },
   { date: '18 มิ.ย. 2569', name: 'CH-02', category: 'Chiller', summary: 'COP: 3.10' },
-  { date: '17 มิ.ย. 2569', name: 'CP-01', category: 'Compressor', summary: 'ประสิทธิภาพ: 92%' },
+  { date: '17 มิ.ย. 2569', name: 'AC-01', category: 'Compressor', summary: 'ประสิทธิภาพ: 92%' },
 ];
 
 function Filters() {

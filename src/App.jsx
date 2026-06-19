@@ -6,6 +6,7 @@ import Verify from './pages/Verify';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
+import Equipment from './pages/Equipment';
 import Placeholder from './pages/Placeholder';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/home" element={<Dashboard />} />
-        <Route path="/equipment" element={<Placeholder title="อุปกรณ์" />} />
+        <Route path="/equipment" element={<Equipment />} />
         <Route path="/history" element={<Placeholder title="ประวัติ" />} />
         <Route path="/reports" element={<Placeholder title="รายงาน" />} />
         <Route path="/settings" element={<Placeholder title="ตั้งค่า" />} />
