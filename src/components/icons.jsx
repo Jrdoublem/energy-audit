@@ -112,6 +112,15 @@ export function PlusIcon({ className }) {
   );
 }
 
+export function MapPinIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" />
+      <circle cx="12" cy="9" r="2.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function UserIcon({ className }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -176,8 +185,10 @@ export function SearchIcon({ className }) {
 export function CompressorIcon({ className }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <rect x="4" y="9" width="12" height="9" rx="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M16 12h4v3h-4M7 9V6a1 1 0 011-1h2a1 1 0 011 1v3" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 20h16" />
+      <rect x="6" y="13" width="3" height="7" rx="0.8" fill="currentColor" stroke="none" />
+      <rect x="11" y="9" width="3" height="11" rx="0.8" fill="currentColor" stroke="none" />
+      <rect x="16" y="4" width="3" height="16" rx="0.8" fill="currentColor" stroke="none" />
     </svg>
   );
 }

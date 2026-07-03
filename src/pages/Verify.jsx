@@ -74,7 +74,6 @@ function Verify() {
           <p className="text-sm text-gray-600 mt-2">เราได้ส่งรหัส 6 หลักไปที่ email ของคุณแล้ว</p>
         </div>
 
-        {/* ช่องกรอกรหัส 6 ช่อง */}
         <div className="flex gap-2 sm:gap-3 mb-3">
           {code.map((digit, i) => (
             <input

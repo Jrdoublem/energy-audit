@@ -29,7 +29,7 @@ const navItems = [
   { to: '/settings', label: 'ตั้งค่า', icon: GearIcon },
 ];
 
-function AppLayout({ title, actions, children }) {
+function AppLayout({ title, actions, children, hideHeader = false, flatBackground = false, fullBleed = false }) {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
@@ -44,11 +44,15 @@ function AppLayout({ title, actions, children }) {
 
   return (
     <div className="w-full font-sans relative overflow-x-hidden">
-      <div className="fixed inset-0 z-0 bg-shell-gradient">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute w-full h-[150%] top-[-25%] bg-tech-grid animate-grid-pan opacity-80 lg:opacity-40"></div>
+      {flatBackground ? (
+        <div className="fixed inset-0 z-0 bg-[#DDF1F3]"></div>
+      ) : (
+        <div className="fixed inset-0 z-0 bg-shell-gradient">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute w-full h-[150%] top-[-25%] bg-tech-grid animate-grid-pan opacity-80 lg:opacity-40"></div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Desktop sidebar */}
       <aside
@@ -122,13 +126,13 @@ function AppLayout({ title, actions, children }) {
             }`}
           >
             <span className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4988C4] to-[#1C4D8D] flex items-center justify-center text-base font-bold shrink-0">
-              ส
+              S
             </span>
             {!collapsed && (
               <>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[15px] font-semibold truncate">สมชาย ใจดี</p>
-                  <p className="text-xs text-blue-200/60 truncate">Admin</p>
+                  <p className="text-[15px] font-semibold truncate">SID-EN</p>
+                  <p className="text-xs text-blue-200/60 truncate">ADMINISTRATOR</p>
                 </div>
                 <ChevronDownIcon className="w-4 h-4 text-blue-200/60 shrink-0" />
               </>
@@ -179,10 +183,14 @@ function AppLayout({ title, actions, children }) {
           collapsed ? 'lg:ml-20' : 'lg:ml-64'
         }`}
       >
-        <div className="w-full max-w-md lg:max-w-none flex items-center justify-between gap-4 pt-8 pb-4 px-6 lg:px-10 lg:pt-8 lg:pb-4">
-          <h1 className="text-2xl lg:text-3xl font-extrabold text-white drop-shadow shrink-0">{title}</h1>
+        <div
+          className={`w-full max-w-md lg:max-w-none items-center justify-between gap-4 px-6 lg:px-10 ${
+            hideHeader ? 'hidden' : 'flex'
+          } ${title ? 'pt-8 pb-4 lg:pt-8 lg:pb-4' : 'pt-5 pb-3 lg:pt-6 lg:pb-3'}`}
+        >
+          {title && <h1 className="text-2xl lg:text-3xl font-extrabold text-white drop-shadow shrink-0">{title}</h1>}
           {actions && <div className="hidden lg:flex flex-1 items-center justify-end gap-3">{actions}</div>}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 ml-auto">
             <div className="relative">
               <button
                 type="button"
@@ -228,7 +236,7 @@ function AppLayout({ title, actions, children }) {
                 </span>
             </button>
             <span className="pointer-events-none absolute right-0 top-full mt-2 whitespace-nowrap bg-[#0F2854] text-white text-xs font-medium px-2.5 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-40">
-              สมชาย ใจดี
+              SID-EN
             </span>
             {menuOpen && (
               <>
@@ -271,12 +279,19 @@ function AppLayout({ title, actions, children }) {
           </div>
         </div>
 
-        <div className="w-full max-w-md lg:max-w-none lg:flex-1 px-5 lg:px-10 pt-6 lg:pt-2 pb-24 lg:pb-12">
+        <div
+          className={
+            fullBleed
+              ? 'w-full max-w-md lg:max-w-none lg:flex-1'
+              : `w-full max-w-md lg:max-w-none lg:flex-1 px-5 lg:px-10 pb-24 lg:pb-12 ${
+                  hideHeader ? 'pt-3 lg:pt-2' : 'pt-6 lg:pt-2'
+                }`
+          }
+        >
           {children}
         </div>
       </div>
 
-      {/* Mobile bottom nav */}
       <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-full max-w-md px-5 z-20">
         <nav className="bg-white rounded-2xl shadow-2xl flex items-center justify-between px-1.5 py-2">
           {navItems.map(({ to, label, icon: Icon }) => (
