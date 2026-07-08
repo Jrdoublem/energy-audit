@@ -13,15 +13,15 @@ function SignUp() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center font-sans relative overflow-hidden">
-      
-      <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0">
+    <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center sm:justify-center font-sans relative overflow-x-hidden">
+
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute w-full h-[150%] top-[-25%] bg-tech-grid animate-grid-pan opacity-80"></div>
       </div>
 
-      <div className="w-full max-w-md relative pt-20 pb-8 sm:pt-24 sm:pb-12 z-10"></div>
+      <div className="w-full max-w-md relative pt-16 pb-6 sm:hidden z-10"></div>
 
-      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-8 sm:py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl sm:mb-12 z-10 flex-1 flex flex-col relative">
+      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-8 py-8 sm:py-10 shadow-[0_-10px_20px_rgba(0,0,0,0.15)] sm:shadow-2xl z-10 flex-1 sm:flex-none flex flex-col relative">
         
         <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-[#0F2854] mb-6 sm:mb-8 tracking-wide">
           Sign up

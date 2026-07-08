@@ -63,9 +63,9 @@ function Verify() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center font-sans relative overflow-hidden">
-      <div className="w-full max-w-md relative pt-20 pb-8 sm:pt-24 sm:pb-12 z-10"></div>
-      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-6 sm:px-8 py-10 shadow-2xl z-10 flex-1 flex flex-col">
+    <div className="min-h-screen w-full bg-animated-gradient flex flex-col items-center sm:justify-center font-sans relative overflow-x-hidden">
+      <div className="w-full max-w-md relative pt-16 pb-6 sm:hidden z-10"></div>
+      <div className="bg-[#F7F8F0] w-full max-w-md rounded-t-[3rem] sm:rounded-[2.5rem] px-6 sm:px-8 py-10 shadow-2xl z-10 flex-1 sm:flex-none flex flex-col">
         <div className="text-center mb-8">
           <svg className="w-20 h-20 mx-auto text-[#0F2854] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
