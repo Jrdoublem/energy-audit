@@ -7,6 +7,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import Equipment from './pages/Equipment';
+import History from './pages/History';
+import Report from './pages/Report';
 import Placeholder from './pages/Placeholder';
 
 function App() {
@@ -21,8 +23,8 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/home" element={<Dashboard />} />
         <Route path="/equipment" element={<Equipment />} />
-        <Route path="/history" element={<Placeholder title="ประวัติ" />} />
-        <Route path="/reports" element={<Placeholder title="รายงาน" />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/reports" element={<Report />} />
         <Route path="/settings" element={<Placeholder title="ตั้งค่า" />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

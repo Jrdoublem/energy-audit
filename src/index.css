@@ -59,3 +59,74 @@ body {
     animation: none;
   }
 }
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Login IT glass card --- */
+.login-glass {
+  background: #f7f8f0;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow: 0 -8px 40px rgba(15, 40, 84, 0.2), 0 0 60px rgba(15, 40, 84, 0.15);
+}
+
+.login-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #38BDF8 40%, #4988C4 70%, transparent 100%);
+  border-radius: 9999px 9999px 0 0;
+}
+
+.login-input {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #0F2854;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(15, 40, 84, 0.06);
+}
+.login-input::placeholder { color: #94A3B8; }
+.login-input:focus {
+  outline: none;
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), 0 1px 3px rgba(15, 40, 84, 0.06);
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.login-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #38BDF8;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes nodeFloat {
+  0%, 100% { transform: translateY(0px);   opacity: 0.5; }
+  50%       { transform: translateY(-8px);  opacity: 0.9; }
+}
+.login-node {
+  animation: nodeFloat 4s ease-in-out infinite;
+}
+.login-node:nth-child(2) { animation-delay: 1.3s; }
+.login-node:nth-child(3) { animation-delay: 2.6s; }
+
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.status-dot {
+  animation: statusPulse 2s ease-in-out infinite;
+}

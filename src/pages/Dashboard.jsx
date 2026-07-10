@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
 import {
@@ -12,7 +12,6 @@ import {
   LeafIconSolid,
   LightningIcon,
   SnowflakeIcon,
-  TrashIcon,
 } from '../components/icons';
 
 function StatCard({ accentBar, accentIcon, icon, label, value, onClick }) {
@@ -242,20 +241,28 @@ const EQUIPMENT_ALERTS = [
 ];
 
 const CATEGORY_STYLE = {
-  Chiller: { badge: 'bg-sky-50 text-sky-600', icon: SnowflakeIcon },
-  Compressor: { badge: 'bg-violet-50 text-violet-600', icon: CompressorIcon },
+  chiller:    { badge: 'bg-sky-50 text-sky-600',    icon: SnowflakeIcon,  label: 'Chiller' },
+  compressor: { badge: 'bg-violet-50 text-violet-600', icon: CompressorIcon, label: 'Compressor' },
+  pump:       { badge: 'bg-cyan-50 text-cyan-600',   icon: SnowflakeIcon,  label: 'Pump' },
+  boiler:     { badge: 'bg-orange-50 text-orange-600', icon: FlameIcon,    label: 'Boiler' },
+  cooling:    { badge: 'bg-teal-50 text-teal-600',   icon: SnowflakeIcon,  label: 'Cooling Tower' },
+  electrical: { badge: 'bg-yellow-50 text-yellow-600', icon: LightningIcon, label: 'Electrical' },
 };
 
-const RECENT_MEASUREMENTS = [
-  { date: '19 มิ.ย. 2569', name: 'CH-01', category: 'Chiller', summary: 'COP: 2.243' },
-  { date: '18 มิ.ย. 2569', name: 'CH-02', category: 'Chiller', summary: 'COP: 3.10' },
-  { date: '17 มิ.ย. 2569', name: 'AC-01', category: 'Compressor', summary: 'ประสิทธิภาพ: 92%' },
-];
+const THAI_MONTHS_SHORT = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
 
-function Filters() {
+function formatShortDate(iso) {
+  const d = new Date(iso);
+  return `${d.getDate()} ${THAI_MONTHS_SHORT[d.getMonth()]} ${d.getFullYear() + 543}`;
+}
+
+const GRADE_LABEL = { good: 'เกณฑ์ดี', ok: 'ปานกลาง', poor: 'ต้องปรับปรุง' };
+const GRADE_COLOR = { good: 'bg-green-100 text-green-600', ok: 'bg-orange-100 text-orange-500', poor: 'bg-red-100 text-red-500' };
+
+function Filters({ factories }) {
   return (
     <>
-      <FilterSelect label="โรงงาน" options={['โรงงาน A', 'โรงงาน B', 'โรงงาน C']} />
+      <FilterSelect label="โรงงาน" options={factories} />
       <FilterSelect
         label="เดือน"
         options={['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']}
@@ -267,6 +274,24 @@ function Filters() {
 
 function Dashboard() {
   const navigate = useNavigate();
+
+  const factories = useMemo(() => {
+    try {
+      const equipment = JSON.parse(localStorage.getItem('equipment') || '[]');
+      return [...new Set(equipment.map((e) => e.factory).filter(Boolean))];
+    } catch {
+      return [];
+    }
+  }, []);
+
+  const recentHistory = useMemo(() => {
+    try {
+      const h = JSON.parse(localStorage.getItem('history') || '[]');
+      return h.slice(0, 5);
+    } catch {
+      return [];
+    }
+  }, []);
 
   return (
     <AppLayout
@@ -285,11 +310,11 @@ function Dashboard() {
           </span>
         </>
       }
-      actions={<Filters />}
+      actions={<Filters factories={factories} />}
     >
-      <div className="flex lg:hidden items-center justify-center gap-3 flex-wrap mb-6">
+      <div className="flex lg:hidden items-center justify-center gap-3 flex-wrap mb-6 -mt-5">
         <div className="flex gap-2 flex-wrap justify-center">
-          <Filters />
+          <Filters factories={factories} />
         </div>
       </div>
 
@@ -433,20 +458,29 @@ function Dashboard() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {RECENT_MEASUREMENTS.map((item, i) => {
-              const cat = CATEGORY_STYLE[item.category];
+            {recentHistory.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="py-8 text-center text-sm text-gray-400">ยังไม่มีประวัติการตรวจวัด</td>
+              </tr>
+            ) : recentHistory.map((record) => {
+              const eq = record.item || record.equipment || {};
+              const cat = CATEGORY_STYLE[eq.category] || { badge: 'bg-gray-100 text-gray-500', icon: SnowflakeIcon, label: eq.category || '-' };
               const CatIcon = cat.icon;
+              const gradeCls = GRADE_COLOR[record.result?.grade] || 'bg-gray-100 text-gray-500';
+              const gradeText = GRADE_LABEL[record.result?.grade] || '-';
               return (
-                <tr key={i} className="hover:bg-[#F7F8F0] transition-colors">
-                  <td className="py-3 px-3 text-gray-500">{item.date}</td>
-                  <td className="py-3 px-3 font-bold text-[#0F2854]">{item.name}</td>
+                <tr key={record.id} className="hover:bg-[#F7F8F0] transition-colors">
+                  <td className="py-3 px-3 text-gray-500">{formatShortDate(record.savedAt)}</td>
+                  <td className="py-3 px-3 font-bold text-[#0F2854]">{eq.id || '-'}</td>
                   <td className="py-3 px-3">
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cat.badge}`}>
                       <CatIcon className="w-3.5 h-3.5" />
-                      {item.category}
+                      {cat.label}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-medium text-gray-700">{item.summary}</td>
+                  <td className="py-3 px-3">
+                    <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${gradeCls}`}>{gradeText}</span>
+                  </td>
                   <td className="py-3 px-3">
                     <div className="flex items-center justify-end gap-2">
                       <button
@@ -455,13 +489,6 @@ function Dashboard() {
                         className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-500 transition-colors"
                       >
                         <EyeIcon className="w-4 h-4" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={(e) => e.stopPropagation()}
-                        className="w-8 h-8 rounded-lg bg-gray-50 hover:bg-red-50 flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors"
-                      >
-                        <TrashIcon className="w-4 h-4" />
                       </button>
                     </div>
                   </td>
@@ -473,26 +500,31 @@ function Dashboard() {
 
         {/* Mobile: card list */}
         <div className="lg:hidden divide-y divide-gray-100">
-          {RECENT_MEASUREMENTS.map((item, i) => {
-            const cat = CATEGORY_STYLE[item.category];
+          {recentHistory.length === 0 ? (
+            <p className="py-8 text-center text-sm text-gray-400">ยังไม่มีประวัติการตรวจวัด</p>
+          ) : recentHistory.map((record) => {
+            const eq = record.item || record.equipment || {};
+            const cat = CATEGORY_STYLE[eq.category] || { badge: 'bg-gray-100 text-gray-500', icon: SnowflakeIcon, label: eq.category || '-' };
             const CatIcon = cat.icon;
+            const gradeCls = GRADE_COLOR[record.result?.grade] || 'bg-gray-100 text-gray-500';
+            const gradeText = GRADE_LABEL[record.result?.grade] || '-';
             return (
               <button
-                key={i}
+                key={record.id}
                 type="button"
                 onClick={() => navigate('/history')}
                 className="w-full text-left px-1 py-3 rounded-lg hover:bg-[#F7F8F0] transition-colors"
               >
                 <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="text-sm font-bold text-[#0F2854]">{item.name}</span>
-                  <span className="text-xs text-gray-400">{item.date}</span>
+                  <span className="text-sm font-bold text-[#0F2854]">{eq.id || '-'}</span>
+                  <span className="text-xs text-gray-400">{formatShortDate(record.savedAt)}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cat.badge}`}>
                     <CatIcon className="w-3.5 h-3.5" />
-                    {item.category}
+                    {cat.label}
                   </span>
-                  <span className="text-sm font-medium text-gray-700">{item.summary}</span>
+                  <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${gradeCls}`}>{gradeText}</span>
                 </div>
               </button>
             );

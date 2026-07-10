@@ -182,6 +182,33 @@ export function SearchIcon({ className }) {
   );
 }
 
+export function RefreshIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h5M20 20v-5h-5" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20 9A8 8 0 006.93 5.07M4 15a8 8 0 0013.07 3.93" />
+    </svg>
+  );
+}
+
+export function CalculatorIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <rect x="4" y="2" width="16" height="20" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 6h8M8 10h2m4 0h2M8 14h2m4 0h2M8 18h2m4 0h2" />
+    </svg>
+  );
+}
+
+export function PencilIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 012.828 2.828L11.828 15.828a2 2 0 01-.96.54l-3.535.707.707-3.535a2 2 0 01.54-.96z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18" />
+    </svg>
+  );
+}
+
 export function CompressorIcon({ className }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

@@ -24,7 +24,7 @@ const NOTIFICATIONS = [
 const navItems = [
   { to: '/home', label: 'หน้าหลัก', icon: HomeIcon },
   { to: '/equipment', label: 'อุปกรณ์', icon: ClipboardIcon },
-  { to: '/history', label: 'ประวัติ', icon: ClockIcon },
+  { to: '/history', label: 'ประวัติ',  icon: ClockIcon },
   { to: '/reports', label: 'รายงาน', icon: DocumentIcon },
   { to: '/settings', label: 'ตั้งค่า', icon: GearIcon },
 ];
